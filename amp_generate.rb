@@ -2,10 +2,11 @@ module Jekyll
   # Defines the base class of AMP posts
   class AmpPost < Page
     def initialize(site, base, dir, post)
+      dirStructure = dir.split('/')
       @site = site
       @base = base
-      @dir = dir
-      @name = 'index.html'
+      @dir = dirStructure.slice(0,4).join('/')
+      @name = dirStructure[4] + '.html'
       self.process(@name)
       self.read_yaml(File.join(base, '_layouts'), 'amp.html')
       self.content               = post.content
